@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluación Inicial de Nutrición y Entrenamiento</title>
+    <link rel="stylesheet" href="styles.css">
+    
+    <script>
+        // ==========================================================================
+        //  RUTAS ABSOLUTAS EXACTAS PARA EXPORTACIÓN A WORD
+        // ==========================================================================
+        var RUTA_REAL_LOGO_1 = "file:///C:/Users/HP/OneDrive/Escritorio/cuestionario-fit/logo1.png";
+        var RUTA_REAL_LOGO_2 = "file:///C:/Users/HP/OneDrive/Escritorio/cuestionario-fit/logo2.png"; 
+        // ==========================================================================
+    </script>
+</head>
+<body>
+
+<div class="container" id="contenidoExpediente">
+    
+    <div class="header-print" style="margin-bottom: 30px; border-bottom: 3px double #1a365d; padding-bottom: 15px;">
+        <table style="width: 100%; border: none; margin-bottom: 10px;">
+            <tr>
+                <td style="width: 25%; text-align: left; border: none; padding: 0;">
+                    <img src="logo1.png" onerror="this.src='logo1.jpg'; this.onerror=null;" alt="Logo Izquierdo" style="max-height: 70px; max-width: 150px; object-fit: contain;">
+                </td>
+                <td style="width: 50%; text-align: center; border: none; padding: 0; vertical-align: middle;">
+                    <h1 style="font-size: 18pt; color: #1a365d; margin: 0; text-transform: uppercase; font-family: 'Arial', sans-serif;">Expediente Clínico y Deportivo</h1>
+                    <p style="font-size: 10pt; color: #4a5568; margin: 5px 0 0 0; font-family: 'Arial', sans-serif;">Evaluación Inicial de Hábitos</p>
+                </td>
+                <td style="width: 25%; text-align: right; border: none; padding: 0;">
+                    <img src="logo2.png" onerror="this.src='logo2.jpg'; this.onerror=null;" alt="Logo Derecho" style="max-height: 70px; max-width: 150px; object-fit: contain;">
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="progreso-web">
+        <div class="barra-progreso" id="barraProgreso"></div>
+    </div>
+
+    <form id="formCuestionario">
+        
+        <div class="paso activo" id="paso-1">
+            <h2>1. Información General</h2>
+            <div class="campo">
+                <label for="nombre">Nombre Completo:</label>
+                <input type="text" id="nombre" name="nombre" required>
+            </div>
+            
+            <div class="campo-grupo">
+                <div class="campo">
+                    <label for="telefono">Teléfono (WhatsApp):</label>
+                    <input type="text" id="telefono" name="telefono" required>
+                </div>
+                <div class="campo">
+                    <label for="email">Correo Electrónico:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+            </div>
+
+            <div class="campo-grupo">
+                <div class="campo">
+                    <label for="edad">Edad:</label>
+                    <input type="number" id="edad" name="edad" required>
+                </div>
+                <div class="campo">
+                    <label for="altura">Altura (cm):</label>
+                    <input type="number" id="altura" name="altura" placeholder="Ej. 175" required>
+                </div>
+                <div class="campo">
+                    <label for="porcentaje_grasa">% de Grasa Estimado:</label>
+                    <input type="number" id="porcentaje_grasa" name="porcentaje_grasa" step="0.1" placeholder="Ej. 15" required>
+                </div>
+            </div>
+            
+            <div class="botones-navegacion">
+                <button type="button" class="btn-sig" onclick="cambiarPaso(1)">Siguiente</button>
+            </div>
+        </div>
+
+        <div class="paso" id="paso-2">
+            <h2>2. Medidas Corporales (cm)</h2>
+            <div class="campo-grupo">
+                <div class="campo">
+                    <label for="cuello">Cuello:</label>
+                    <input type="number" id="cuello" name="cuello" step="0.1" required>
+                </div>
+                <div class="campo">
+                    <label for="pecho">Pecho (Tórax):</label>
+                    <input type="number" id="pecho" name="pecho" step="0.1" required>
+                </div>
+            </div>
+
+            <div class="campo-grupo">
+                <div class="campo">
+                    <label for="brazo_relajado">Brazo Relajado:</label>
+                    <input type="number" id="brazo_relajado" name="brazo_relajado" step="0.1" required>
+                </div>
+                <div class="campo">
+                    <label for="brazo_flexionado">Brazo Flexionado:</label>
+                    <input type="number" id="brazo_flexionado" name="brazo_flexionado" step="0.1" required>
+                </div>
+            </div>
+
+            <div class="campo-grupo">
+                <div class="campo">
+                    <label for="cintura">Cintura:</label>
+                    <input type="number" id="cintura" name="cintura" step="0.1" required>
+                </div>
+                <div class="campo">
+                    <label for="cadera">Cadera:</label>
+                    <input type="number" id="cadera" name="cadera" step="0.1" required>
+                </div>
+            </div>
+
+            <div class="campo-grupo">
+                <div class="campo">
+                    <label for="cuadricep">Cuádriceps:</label>
+                    <input type="number" id="cuadricep" name="cuadricep" step="0.1" required>
+                </div>
+                <div class="campo">
+                    <label for="pantorrilla">Pantorrilla:</label>
+                    <input type="number" id="pantorrilla" name="pantorrilla" step="0.1" required>
+                </div>
+            </div>
+
+            <div class="botones-navegacion">
+                <button type="button" class="btn-ant" onclick="cambiarPaso(-1)">Anterior</button>
+                <button type="button" class="btn-sig" onclick="cambiarPaso(1)">Siguiente</button>
+            </div>
+        </div>
+
+        <div class="paso" id="paso-3">
+            <h2>3. Historial Médico y de Salud</h2>
+            
+            <div class="campo">
+                <label for="tiene_patologias">¿Padece alguna enfermedad diagnosticada o condición médica?</label>
+                <select id="tiene_patologias" name="tiene_patologias" onchange="toggleCondicional('tiene_patologias', 'contenedor-patologias', 'patologias')" required>
+                    <option value="No">No</option>
+                    <option value="Sí">Sí</option>
+                </select>
+                <div id="contenedor-patologias" class="campo-condicional">
+                    <label for="patologias" class="sublabel">Especifique cuáles enfermedades o condiciones padece:</label>
+                    <textarea id="patologias" name="patologias" placeholder="Diabetes, hipertensión, hipotiroidismo, etc."></textarea>
+                </div>
+            </div>
+
+            <div class="campo">
+                <label for="tiene_lesiones">¿Tiene alguna lesión articular o muscular actual?</label>
+                <select id="tiene_lesiones" name="tiene_lesiones" onchange="toggleCondicional('tiene_lesiones', 'contenedor-lesiones', 'lesiones')" required>
+                    <option value="No">No</option>
+                    <option value="Sí">Sí</option>
+                </select>
+                <div id="contenedor-lesiones" class="campo-condicional">
+                    <label for="lesiones" class="sublabel">Especifique zonas y tipo de molestia:</label>
+                    <textarea id="lesiones" name="lesiones" placeholder="Molestias en rodillas, espalda baja, hombros..."></textarea>
+                </div>
+            </div>
+
+            <div class="botones-navegacion">
+                <button type="button" class="btn-ant" onclick="cambiarPaso(-1)">Anterior</button>
+                <button type="button" class="btn-sig" onclick="cambiarPaso(1)">Siguiente</button>
+            </div>
+        </div>
+
+        <div class="paso" id="paso-4">
+            <h2>4. Historial Nutricional y Digestivo</h2>
+            
+            <div class="campo">
+                <label for="comidas">¿Cuántas comidas realiza al día y en qué horarios?</label>
+                <input type="text" id="comidas" name="comidas" required>
+            </div>
+
+            <div class="campo">
+                <label for="diario_comida">Descríbeme detalladamente lo que comes en un día común (Desayuno, comida, cena, snacks):</label>
+                <textarea id="diario_comida" name="diario_comida" placeholder="Desayuno, comida, cena, snacks..." required></textarea>
+            </div>
+
+            <div class="campo">
+                <label for="tiene_alergias">¿Tiene alergias o algún alimento que no le guste/tolere?</label>
+                <select id="tiene_alergias" name="tiene_alergias" onchange="toggleCondicional('tiene_alergias', 'contenedor-alergias', 'alergias')" required>
+                    <option value="No">No</option>
+                    <option value="Sí">Sí</option>
+                </select>
+                <div id="contenedor-alergias" class="campo-condicional">
+                    <label for="alergias" class="sublabel">Especifique qué alimentos no puede o no le gusta comer:</label>
+                    <textarea id="alergias" name="alergias" placeholder="Ej. Lácteos, pescados, jitomate..."></textarea>
+                </div>
+            </div>
+
+            <div class="campo">
+                <label for="tiene_ansiedad">¿Sufre de ansiedad por la comida o atracones?</label>
+                <select id="tiene_ansiedad" name="tiene_ansiedad" onchange="toggleCondicional('tiene_ansiedad', 'contenedor-ansiedad', 'ansiedad')" required>
+                    <option value="No">No</option>
+                    <option value="Sí">Sí</option>
+                </select>
+                <div id="contenedor-ansiedad" class="campo-condicional">
+                    <label for="ansiedad" class="sublabel">Especifique situaciones de ansiedad o patrones de atracón detectados:</label>
+                    <textarea id="ansiedad" name="ansiedad" placeholder="Describa brevemente en qué momentos se presenta..."></textarea>
+                </div>
+            </div>
+
+            <div class="botones-navegacion">
+                <button type="button" class="btn-ant" onclick="cambiarPaso(-1)">Anterior</button>
+                <button type="button" class="btn-sig" onclick="cambiarPaso(1)">Siguiente</button>
+            </div>
+        </div>
+
+        <div class="paso" id="paso-5">
+            <h2>5. Historial de Entrenamiento y Objetivos</h2>
+            <div class="campo">
+                <label for="experiencia">Nivel de experiencia en entrenamiento de fuerza:</label>
+                <select id="experiencia" name="experiencia" required>
+                    <option value="principiante">Principiante (Menos de 6 meses)</option>
+                    <option value="intermedio">Intermedio (6 meses a 2 años)</option>
+                    <option value="avanzado">Avanzado (Más de 2 años)</option>
+                </select>
+            </div>
+            <div class="campo">
+                <label for="objetivo">¿Cuál es su objetivo principal (Estética, salud, fuerza)?</label>
+                <textarea id="objetivo" name="objetivo" required></textarea>
+            </div>
+            <div class="botones-navegacion">
+                <button type="button" class="btn-ant" onclick="cambiarPaso(-1)">Anterior</button>
+                <button type="button" class="btn-print" onclick="finalizarYDescargarWord()">Finalizar y Descargar Word</button>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+<script>
+    var pasoActual = 1;
+    var totalPasos = 5;
+
+    function cambiarPaso(direccion) {
+        if (direccion === 1) {
+            var pasoContenedor = document.getElementById("paso-" + pasoActual);
+            var inputs = pasoContenedor.querySelectorAll("input, select, textarea");
+            
+            for (var i = 0; i < inputs.length; i++) {
+                if (inputs[i].hasAttribute("required") && !inputs[i].value.trim()) {
+                    alert("Por favor, llena todos los campos obligatorios para poder continuar.");
+                    inputs[i].focus();
+                    return;
+                }
+            }
+        }
+
+        document.getElementById("paso-" + pasoActual).classList.remove("activo");
+        pasoActual += direccion;
+        document.getElementById("paso-" + pasoActual).classList.add("activo");
+        
+        actualizarProgreso();
+    }
+
+    function actualizarProgreso() {
+        var porcentaje = ((pasoActual - 1) / (totalPasos - 1)) * 100;
+        document.getElementById("barraProgreso").style.width = porcentaje + "%";
+    }
+
+    function toggleCondicional(selectId, contenedorId, textareaId) {
+        var selectElement = document.getElementById(selectId);
+        var contenedor = document.getElementById(contenedorId);
+        var textarea = document.getElementById(textareaId);
+        
+        if (selectElement.value === "Sí") {
+            contenedor.classList.add("mostrar");
+            textarea.setAttribute("required", "required");
+        } else {
+            contenedor.classList.remove("mostrar");
+            textarea.removeAttribute("required");
+            textarea.value = "";
+        }
+    }
+
+    var form = document.getElementById("formCuestionario");
+    
+    form.addEventListener("input", function() {
+        var datos = new FormData(form);
+        var objetoDatos = Object.fromEntries(datos.entries());
+        localStorage.setItem("cuestionario_progreso_v14", JSON.stringify(objetoDatos));
+    });
+
+    window.addEventListener("load", function() {
+        var datosGuardados = localStorage.getItem("cuestionario_progreso_v14");
+        if (datosGuardados) {
+            var objetoDatos = JSON.parse(datosGuardados);
+            Object.keys(objetoDatos).forEach(function(key) {
+                var input = form.elements[key];
+                if (input) input.value = objetoDatos[key];
+            });
+            
+            toggleCondicional("tiene_patologias", "contenedor-patologias", "patologias");
+            toggleCondicional("tiene_lesiones", "contenedor-lesiones", "lesiones");
+            toggleCondicional("tiene_alergias", "contenedor-alergias", "alergias");
+            toggleCondicional("tiene_ansiedad", "contenedor-ansiedad", "ansiedad");
+            
+            actualizarProgreso();
+        }
+    });
+
+    function finalizarYDescargarWord() {
+        var pasoContenedor = document.getElementById("paso-5");
+        var inputs = pasoContenedor.querySelectorAll("input, select, textarea");
+        for (var i = 0; i < inputs.length; i++) {
+            if (inputs[i].hasAttribute("required") && !inputs[i].value.trim()) {
+                alert("Por favor, llena todos los campos obligatorios antes de finalizar.");
+                inputs[i].focus();
+                return;
+            }
+        }
+
+        var nombreAlumno = document.getElementById("nombre").value || "Nuevo_Alumno";
+
+        var estilosWord = "<style>" +
+            "body { font-family: 'Arial', sans-serif; color: #000000; line-height: 1.5; }" +
+            "h2 { color: #1a365d; font-size: 14pt; border-bottom: 1px solid #ccc; margin-top: 15pt; padding-bottom: 3px; }" +
+            "p { font-size: 11pt; margin-bottom: 8px; }" +
+            "table { width: 100%; margin-top: 10px; border: 1px solid #ddd; }" +
+            "td { padding: 8px; border: 1px solid #ddd; font-size: 11pt; }" +
+            "</style>";
+
+        var htmlReporte = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'>" + estilosWord + "</head><body>" +
+            
+            "<table style='width:100%; border:none; margin-bottom:20px;'>" +
+                "<tr>" +
+                    "<td style='width:25%; border:none; text-align:left;'><img src='" + RUTA_REAL_LOGO_1 + "' width='120' height='60'></td>" +
+                    "<td style='width:50%; border:none; text-align:center; vertical-align:middle;'>" +
+                        "<h1 style='font-size:18pt; color:#1a365d; margin:0;'>EXPEDIENTE DE EVALUACIÓN INICIAL</h1>" +
+                        "<p style='font-size:10pt; color:#555; margin:5px 0 0 0;'>Nutrición Integral & Entrenamiento Inteligente</p>" +
+                    "</td>" +
+                    "<td style='width:25%; border:none; text-align:right;'><img src='" + RUTA_REAL_LOGO_2 + "' width='120' height='60'></td>" +
+                "</tr>" +
+            "</table>" +
+            
+            "<h2>1. Información General</h2>" +
+            "<table>" +
+                "<tr><td><strong>Nombre Completo:</strong> " + document.getElementById("nombre").value + "</td><td><strong>Edad:</strong> " + document.getElementById("edad").value + " años</td></tr>" +
+                "<tr><td><strong>Teléfono:</strong> " + document.getElementById("telefono").value + "</td><td><strong>Correo:</strong> " + document.getElementById("email").value + "</td></tr>" +
+                "<tr><td><strong>Altura:</strong> " + document.getElementById("altura").value + " cm</td><td><strong>% Grasa Estimado:</strong> " + document.getElementById("porcentaje_grasa").value + " %</td></tr>" +
+            "</table>" +
+
+            "<h2>2. Medidas Corporales (cm)</h2>" +
+            "<table>" +
+                "<tr><td><strong>Cuello:</strong> " + document.getElementById("cuello").value + " cm</td><td><strong>Pecho:</strong> " + document.getElementById("pecho").value + " cm</td></tr>" +
+                "<tr><td><strong>Brazo Relajado:</strong> " + document.getElementById("brazo_relajado").value + " cm</td><td><strong>Brazo Flexionado:</strong> " + document.getElementById("brazo_flexionado").value + " cm</td></tr>" +
+                "<tr><td><strong>Cintura:</strong> " + document.getElementById("cintura").value + " cm</td><td><strong>Cadera:</strong> " + document.getElementById("cadera").value + " cm</td></tr>" +
+                "<tr><td><strong>Cuádriceps:</strong> " + document.getElementById("cuadricep").value + " cm</td><td><strong>Pantorrilla:</strong> " + document.getElementById("pantorrilla").value + " cm</td></tr>" +
+            "</table>" +
+
+            "<h2>3. Historial Médico y de Salud</h2>" +
+            "<p><strong>¿Padece alguna enfermedad diagnosticada?:</strong> " + document.getElementById("tiene_patologias").value + "</p>" +
+            (document.getElementById("tiene_patologias").value === "Sí" ? "<p style='margin-left:20px; color:#555;'><em>Detalle: " + document.getElementById("patologias").value + "</em></p>" : "") +
+            
+            "<p><strong>¿Tiene alguna lesión muscular o articular?:</strong> " + document.getElementById("tiene_lesiones").value + "</p>" +
+            (document.getElementById("tiene_lesiones").value === "Sí" ? "<p style='margin-left:20px; color:#555;'><em>Detalle: " + document.getElementById("lesiones").value + "</em></p>" : "") +
+
+            "<h2>4. Historial Nutricional y Digestivo</h2>" +
+            "<p><strong>Número de comidas y horarios habituales:</strong> " + document.getElementById("comidas").value + "</p>" +
+            "<p><strong>Diario de alimentación común:</strong><br>" + document.getElementById("diario_comida").value.replace(/\n/g, "<br>") + "</p>" +
+            
+            "<p><strong>¿Tiene allergies o intolerancias?:</strong> " + document.getElementById("tiene_alergias").value + "</p>" +
+            (document.getElementById("tiene_alergias").value === "Sí" ? "<p style='margin-left:20px; color:#555;'><em>Detalle: " + document.getElementById("alergias").value + "</em></p>" : "") +
+            
+            "<p><strong>¿Sufre de ansiedad por la comida o atracones?:</strong> " + document.getElementById("tiene_ansiedad").value + "</p>" +
+            (document.getElementById("tiene_ansiedad").value === "Sí" ? "<p style='margin-left:20px; color:#555;'><em>Detalle: " + document.getElementById("ansiedad").value + "</em></p>" : "") +
+
+            "<h2>5. Entrenamiento y Objetivos</h2>" +
+            "<p><strong>Nivel de experiencia en fuerza:</strong> " + document.getElementById("experiencia").value + "</p>" +
+            "<p><strong>Objetivo principal:</strong> " + document.getElementById("objetivo").value + "</p>" +
+            
+            "</body></html>";
+
+        var blob = new Blob(['\ufeff' + htmlReporte], {
+            type: 'application/msword'
+        });
+        
+        var url = URL.createObjectURL(blob);
+        var downloadLink = document.createElement("a");
+        downloadLink.href = url;
+        downloadLink.download = "Expediente_" + nombreAlumno.replace(/\s+/g, '_') + ".doc";
+        
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+
+        localStorage.removeItem("cuestionario_progreso_v14");
+        setTimeout(function() {
+            window.location.reload();
+        }, 600);
+    }
+</script>
+
+</body>
+</html>
